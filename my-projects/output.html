@@ -1,0 +1,271 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prompt Evaluation Report</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                color: #333;
+            }
+            .header {
+                background-color: #f0f0f0;
+                padding: 20px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+            .summary-stats {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .stat-box {
+                background-color: #fff;
+                border-radius: 5px;
+                padding: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                flex-basis: 30%;
+                min-width: 200px;
+            }
+            .stat-value {
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            th {
+                background-color: #4a4a4a;
+                color: white;
+                text-align: left;
+                padding: 12px;
+            }
+            td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                vertical-align: top;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .output-cell {
+                white-space: pre-wrap;
+            }
+            .score {
+                font-weight: bold;
+                padding: 5px 10px;
+                border-radius: 3px;
+                display: inline-block;
+            }
+            .score-high {
+                background-color: #c8e6c9;
+                color: #2e7d32;
+            }
+            .score-medium {
+                background-color: #fff9c4;
+                color: #f57f17;
+            }
+            .score-low {
+                background-color: #ffcdd2;
+                color: #c62828;
+            }
+            .output {
+                overflow: auto;
+                white-space: pre-wrap;
+            }
+
+            .output pre {
+                background-color: #f5f5f5;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 10px;
+                margin: 0;
+                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                font-size: 14px;
+                line-height: 1.4;
+                color: #333;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+                overflow-x: auto;
+                white-space: pre-wrap; 
+                word-wrap: break-word; 
+            }
+
+            td {
+                width: 20%;
+            }
+            .score-col {
+                width: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Prompt Evaluation Report</h1>
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div>Total Test Cases</div>
+                    <div class="stat-value">4</div>
+                </div>
+                <div class="stat-box">
+                    <div>Average Score</div>
+                    <div class="stat-value">8.2 / 10</div>
+                </div>
+                <div class="stat-box">
+                    <div>Pass Rate (≥7)</div>
+                    <div class="stat-value">75.0%</div>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Prompt Inputs</th>
+                    <th>Solution Criteria</th>
+                    <th>Output</th>
+                    <th>Score</th>
+                    <th>Reasoning</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            <tr>
+                <td>Testing with interdisciplinary content mixing humanities and STEM fields to ensure the prompt handles diverse subject matter and extracts topics across different knowledge domains</td>
+                <td class="prompt-inputs"><strong>content:</strong> Recent advances in computational musicology have leveraged machine learning algorithms to analyze the structural patterns in Bach's compositions, revealing previously undetected harmonic relationships through neural network analysis. Simultaneously, phenomenological approaches to music cognition examine how listeners experience temporal flow and emotional resonance during performance, drawing on embodied cognition theories from cognitive neuroscience. These interdisciplinary investigations bridge digital humanities methodology with empirical psychology, demonstrating how quantitative analysis of musical notation combined with qualitative studies of listener perception can illuminate both the mathematical properties of tonal systems and the subjective dimensions of aesthetic experience.</td>
+                <td class="criteria">• Extracts topics spanning both STEM fields (machine learning, neural networks, cognitive neuroscience) and humanities fields (musicology, phenomenology, aesthetic experience)<br>• Identifies all major topics without omitting interdisciplinary concepts<br>• Returns results as a JSON array of strings</td>
+                <td class="output"><pre>```json
+[
+  "computational musicology",
+  "machine learning algorithms",
+  "Bach's compositions",
+  "harmonic relationships",
+  "neural network analysis",
+  "phenomenological approaches",
+  "music cognition",
+  "temporal flow",
+  "emotional resonance",
+  "embodied cognition",
+  "cognitive neuroscience",
+  "digital humanities",
+  "empirical psychology",
+  "quantitative analysis",
+  "musical notation",
+  "listener perception",
+  "tonal systems",
+  "aesthetic experience"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">9</span></td>
+                <td class="reasoning">The solution fully satisfies all mandatory requirements: it provides a JSON array of strings containing topics from the article, with clean topic names and no extra commentary. It also meets the secondary criteria by spanning both STEM and humanities fields, identifying major topics without significant omissions, and capturing interdisciplinary concepts. The extraction is thorough and accurate, though some topics could arguably be consolidated at a higher level of abstraction. However, this level of detail is not problematic and actually demonstrates comprehensive coverage.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with a dense passage containing implicit topics buried within complex sentences to evaluate whether the prompt can infer and surface less obvious thematic elements</td>
+                <td class="prompt-inputs"><strong>content:</strong> The epistemological implications of quantum entanglement challenge classical assumptions about locality and determinism, yet contemporary interpretations increasingly suggest that measurement-induced decoherence may reconcile wave function collapse with relativistic constraints. Furthermore, the thermodynamic cost of information erasure, as articulated through Landauer's principle, intersects with quantum computing architectures where qubit manipulation necessitates careful management of entropy production to maintain coherence times. These developments implicitly underscore tensions between information theory, quantum mechanics, and fundamental physics that extend beyond conventional particle physics into cosmological models of black hole thermodynamics and the holographic principle.</td>
+                <td class="criteria">• Extracts both explicit topics (e.g., quantum entanglement, wave function collapse) and implicit topics buried in technical context (e.g., information theory, thermodynamics, cosmology)<br>• Identifies thematic elements that require inference from complex sentence structures and domain-specific language<br>• Returns results as a JSON array of strings with no duplicates</td>
+                <td class="output"><pre>```json
+[
+  "quantum entanglement",
+  "locality",
+  "determinism",
+  "measurement-induced decoherence",
+  "wave function collapse",
+  "relativistic constraints",
+  "Landauer's principle",
+  "information erasure",
+  "thermodynamic cost",
+  "quantum computing",
+  "qubit manipulation",
+  "entropy production",
+  "coherence times",
+  "information theory",
+  "quantum mechanics",
+  "fundamental physics",
+  "particle physics",
+  "cosmological models",
+  "black hole thermodynamics",
+  "holographic principle"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">9</span></td>
+                <td class="reasoning">The solution fully satisfies all mandatory requirements: it is a valid JSON array of strings containing topics from the passage, with no extra commentary, and nothing else in the response. It demonstrates strong coverage of both explicit topics (quantum entanglement, Landauer's principle, black hole thermodynamics) and implicit thematic elements (information theory, cosmology). The extraction shows understanding of complex technical language and domain-specific context. Minor weaknesses exist in the inclusion of some philosophical properties as standalone topics, but these are marginal issues that don't violate the stated criteria. The solution meets all mandatory and secondary criteria effectively.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with a passage containing overlapping and hierarchical topics to verify the prompt correctly identifies distinct main topics without excessive duplication</td>
+                <td class="prompt-inputs"><strong>content:</strong> This study examines the intersection of machine learning and climate science, specifically focusing on neural network applications in weather prediction and climate modeling. We employ deep learning architectures, particularly convolutional neural networks (CNNs) and recurrent neural networks (RNNs), to process spatiotemporal climate data. Our approach builds upon previous machine learning research in atmospheric dynamics while addressing computational efficiency challenges inherent to large-scale climate simulations. The neural network framework demonstrates superior performance compared to traditional statistical methods in predicting precipitation patterns, though questions remain about the interpretability of deep learning models in climate science applications. Furthermore, we investigate how machine learning can enhance climate data assimilation techniques, a critical component of modern weather forecasting systems.</td>
+                <td class="criteria">• Extracts main distinct topics without excessive duplication (e.g., 'machine learning' and 'neural networks' should not both appear if one is a subtopic of the other)<br>• Identifies hierarchical topics appropriately by recognizing that specific architectures (CNNs, RNNs) are implementations of the broader machine learning concept<br>• Includes all major topic areas: machine learning, climate science, neural networks, weather prediction, climate modeling, and data assimilation</td>
+                <td class="output"><pre>```json
+[
+  "machine learning",
+  "climate science",
+  "neural networks",
+  "weather prediction",
+  "climate modeling",
+  "deep learning",
+  "convolutional neural networks",
+  "recurrent neural networks",
+  "spatiotemporal data",
+  "atmospheric dynamics",
+  "computational efficiency",
+  "climate simulations",
+  "precipitation patterns",
+  "interpretability",
+  "climate data assimilation",
+  "weather forecasting"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-medium">6</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements: it is a valid JSON array of strings containing topics from the article with no extra commentary. However, it fails to properly apply the secondary criterion about hierarchical topic recognition. The criteria explicitly state that specific architectures (CNNs, RNNs) should be recognized as implementations of broader concepts, and by extension, 'neural networks' and 'deep learning' should not both appear alongside 'machine learning' as they represent the same conceptual hierarchy. The solution includes 16 items when a more rigorous application of the deduplication principle would reduce this to approximately 12-13 core topics. While the extraction is comprehensive, it does not adequately address the hierarchical organization requirement.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with a passage containing domain-specific jargon and acronyms to verify the prompt correctly extracts technical topics and handles specialized terminology without over-simplification</td>
+                <td class="prompt-inputs"><strong>content:</strong> Recent advances in CRISPR-Cas9 gene editing have revolutionized therapeutic applications for monogenic disorders. The programmable nuclease system, derived from bacterial adaptive immunity mechanisms, enables precise genomic modifications with reduced off-target effects through optimized sgRNA design and modified PAM sequences. Clinical trials for SMA (spinal muscular atrophy) treatment utilizing AAV-mediated delivery of SMN1 gene show 90% restoration of motor function, while base editing techniques—including adenine base editors (ABEs) and cytosine base editors (CBEs)—circumvent double-strand break formation, offering superior safety profiles for ex vivo lymphocyte engineering in CAR-T cell immunotherapy. Epigenetic modifications via HDAC inhibitors and DNA methyltransferase antagonists represent complementary approaches to traditional mutagenesis, particularly in oncology applications where heterochromatin remodeling demonstrates synergistic effects with checkpoint inhibitors.</td>
+                <td class="criteria">• Extracts specialized terminology and acronyms as distinct topics (e.g., CRISPR-Cas9, sgRNA, PAM, SMA, AAV, SMN1, ABE, CBE, CAR-T, HDAC)<br>• Identifies broader conceptual topics without over-simplification (e.g., gene editing, base editing, epigenetic modifications, immunotherapy)<br>• Maintains technical precision and does not collapse domain-specific jargon into generic categories</td>
+                <td class="output"><pre>```json
+[
+  "CRISPR-Cas9 gene editing",
+  "monogenic disorders",
+  "programmable nuclease",
+  "bacterial adaptive immunity",
+  "sgRNA design",
+  "PAM sequences",
+  "spinal muscular atrophy (SMA)",
+  "AAV-mediated delivery",
+  "SMN1 gene",
+  "motor function restoration",
+  "base editing",
+  "adenine base editors (ABEs)",
+  "cytosine base editors (CBEs)",
+  "double-strand break",
+  "ex vivo lymphocyte engineering",
+  "CAR-T cell immunotherapy",
+  "epigenetic modifications",
+  "HDAC inhibitors",
+  "DNA methyltransferase antagonists",
+  "mutagenesis",
+  "oncology",
+  "heterochromatin remodeling",
+  "checkpoint inhibitors"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">9</span></td>
+                <td class="reasoning">The solution fully satisfies all mandatory requirements: it is a valid JSON array of strings containing topics from the passage with no extra commentary. It excels at the secondary criteria by extracting both specialized terminology/acronyms and broader conceptual topics while maintaining technical precision. The extraction is comprehensive and well-balanced, capturing the full scope of the scholarly content from molecular mechanisms (sgRNA design, PAM sequences) through clinical applications (SMA treatment, CAR-T immunotherapy) to complementary approaches (epigenetic modifications). The minor weaknesses are negligible and do not detract from an otherwise excellent extraction that demonstrates strong understanding of the domain.</td>
+            </tr>
+        
+            </tbody>
+        </table>
+    </body>
+    </html>
+    

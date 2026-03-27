@@ -1,0 +1,50 @@
+[
+  {
+    "prompt_inputs": {
+      "content": "Recent advances in computational musicology have leveraged machine learning algorithms to analyze the structural patterns in Bach's compositions, revealing previously undetected harmonic relationships through neural network analysis. Simultaneously, phenomenological approaches to music cognition examine how listeners experience temporal flow and emotional resonance during performance, drawing on embodied cognition theories from cognitive neuroscience. These interdisciplinary investigations bridge digital humanities methodology with empirical psychology, demonstrating how quantitative analysis of musical notation combined with qualitative studies of listener perception can illuminate both the mathematical properties of tonal systems and the subjective dimensions of aesthetic experience."
+    },
+    "solution_criteria": [
+      "Extracts topics spanning both STEM fields (machine learning, neural networks, cognitive neuroscience) and humanities fields (musicology, phenomenology, aesthetic experience)",
+      "Identifies all major topics without omitting interdisciplinary concepts",
+      "Returns results as a JSON array of strings"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with interdisciplinary content mixing humanities and STEM fields to ensure the prompt handles diverse subject matter and extracts topics across different knowledge domains"
+  },
+  {
+    "prompt_inputs": {
+      "content": "The epistemological implications of quantum entanglement challenge classical assumptions about locality and determinism, yet contemporary interpretations increasingly suggest that measurement-induced decoherence may reconcile wave function collapse with relativistic constraints. Furthermore, the thermodynamic cost of information erasure, as articulated through Landauer's principle, intersects with quantum computing architectures where qubit manipulation necessitates careful management of entropy production to maintain coherence times. These developments implicitly underscore tensions between information theory, quantum mechanics, and fundamental physics that extend beyond conventional particle physics into cosmological models of black hole thermodynamics and the holographic principle."
+    },
+    "solution_criteria": [
+      "Extracts both explicit topics (e.g., quantum entanglement, wave function collapse) and implicit topics buried in technical context (e.g., information theory, thermodynamics, cosmology)",
+      "Identifies thematic elements that require inference from complex sentence structures and domain-specific language",
+      "Returns results as a JSON array of strings with no duplicates"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with a dense passage containing implicit topics buried within complex sentences to evaluate whether the prompt can infer and surface less obvious thematic elements"
+  },
+  {
+    "prompt_inputs": {
+      "content": "This study examines the intersection of machine learning and climate science, specifically focusing on neural network applications in weather prediction and climate modeling. We employ deep learning architectures, particularly convolutional neural networks (CNNs) and recurrent neural networks (RNNs), to process spatiotemporal climate data. Our approach builds upon previous machine learning research in atmospheric dynamics while addressing computational efficiency challenges inherent to large-scale climate simulations. The neural network framework demonstrates superior performance compared to traditional statistical methods in predicting precipitation patterns, though questions remain about the interpretability of deep learning models in climate science applications. Furthermore, we investigate how machine learning can enhance climate data assimilation techniques, a critical component of modern weather forecasting systems."
+    },
+    "solution_criteria": [
+      "Extracts main distinct topics without excessive duplication (e.g., 'machine learning' and 'neural networks' should not both appear if one is a subtopic of the other)",
+      "Identifies hierarchical topics appropriately by recognizing that specific architectures (CNNs, RNNs) are implementations of the broader machine learning concept",
+      "Includes all major topic areas: machine learning, climate science, neural networks, weather prediction, climate modeling, and data assimilation"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with a passage containing overlapping and hierarchical topics to verify the prompt correctly identifies distinct main topics without excessive duplication"
+  },
+  {
+    "prompt_inputs": {
+      "content": "Recent advances in CRISPR-Cas9 gene editing have revolutionized therapeutic applications for monogenic disorders. The programmable nuclease system, derived from bacterial adaptive immunity mechanisms, enables precise genomic modifications with reduced off-target effects through optimized sgRNA design and modified PAM sequences. Clinical trials for SMA (spinal muscular atrophy) treatment utilizing AAV-mediated delivery of SMN1 gene show 90% restoration of motor function, while base editing techniques\u2014including adenine base editors (ABEs) and cytosine base editors (CBEs)\u2014circumvent double-strand break formation, offering superior safety profiles for ex vivo lymphocyte engineering in CAR-T cell immunotherapy. Epigenetic modifications via HDAC inhibitors and DNA methyltransferase antagonists represent complementary approaches to traditional mutagenesis, particularly in oncology applications where heterochromatin remodeling demonstrates synergistic effects with checkpoint inhibitors."
+    },
+    "solution_criteria": [
+      "Extracts specialized terminology and acronyms as distinct topics (e.g., CRISPR-Cas9, sgRNA, PAM, SMA, AAV, SMN1, ABE, CBE, CAR-T, HDAC)",
+      "Identifies broader conceptual topics without over-simplification (e.g., gene editing, base editing, epigenetic modifications, immunotherapy)",
+      "Maintains technical precision and does not collapse domain-specific jargon into generic categories"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with a passage containing domain-specific jargon and acronyms to verify the prompt correctly extracts technical topics and handles specialized terminology without over-simplification"
+  }
+]

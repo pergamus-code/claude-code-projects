@@ -1,0 +1,70 @@
+[
+  {
+    "output": "```json\n[\n  \"computational musicology\",\n  \"machine learning algorithms\",\n  \"Bach's compositions\",\n  \"harmonic relationships\",\n  \"neural network analysis\",\n  \"phenomenological approaches\",\n  \"music cognition\",\n  \"temporal flow\",\n  \"emotional resonance\",\n  \"embodied cognition\",\n  \"cognitive neuroscience\",\n  \"digital humanities\",\n  \"empirical psychology\",\n  \"quantitative analysis\",\n  \"musical notation\",\n  \"listener perception\",\n  \"tonal systems\",\n  \"aesthetic experience\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Recent advances in computational musicology have leveraged machine learning algorithms to analyze the structural patterns in Bach's compositions, revealing previously undetected harmonic relationships through neural network analysis. Simultaneously, phenomenological approaches to music cognition examine how listeners experience temporal flow and emotional resonance during performance, drawing on embodied cognition theories from cognitive neuroscience. These interdisciplinary investigations bridge digital humanities methodology with empirical psychology, demonstrating how quantitative analysis of musical notation combined with qualitative studies of listener perception can illuminate both the mathematical properties of tonal systems and the subjective dimensions of aesthetic experience."
+      },
+      "solution_criteria": [
+        "Extracts topics spanning both STEM fields (machine learning, neural networks, cognitive neuroscience) and humanities fields (musicology, phenomenology, aesthetic experience)",
+        "Identifies all major topics without omitting interdisciplinary concepts",
+        "Returns results as a JSON array of strings"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Testing with interdisciplinary content mixing humanities and STEM fields to ensure the prompt handles diverse subject matter and extracts topics across different knowledge domains"
+    },
+    "score": 9,
+    "reasoning": "The solution fully satisfies all mandatory requirements: it provides a JSON array of strings containing topics from the article, with clean topic names and no extra commentary. It also meets the secondary criteria by spanning both STEM and humanities fields, identifying major topics without significant omissions, and capturing interdisciplinary concepts. The extraction is thorough and accurate, though some topics could arguably be consolidated at a higher level of abstraction. However, this level of detail is not problematic and actually demonstrates comprehensive coverage."
+  },
+  {
+    "output": "```json\n[\n  \"quantum entanglement\",\n  \"locality\",\n  \"determinism\",\n  \"measurement-induced decoherence\",\n  \"wave function collapse\",\n  \"relativistic constraints\",\n  \"Landauer's principle\",\n  \"information erasure\",\n  \"thermodynamic cost\",\n  \"quantum computing\",\n  \"qubit manipulation\",\n  \"entropy production\",\n  \"coherence times\",\n  \"information theory\",\n  \"quantum mechanics\",\n  \"fundamental physics\",\n  \"particle physics\",\n  \"cosmological models\",\n  \"black hole thermodynamics\",\n  \"holographic principle\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "The epistemological implications of quantum entanglement challenge classical assumptions about locality and determinism, yet contemporary interpretations increasingly suggest that measurement-induced decoherence may reconcile wave function collapse with relativistic constraints. Furthermore, the thermodynamic cost of information erasure, as articulated through Landauer's principle, intersects with quantum computing architectures where qubit manipulation necessitates careful management of entropy production to maintain coherence times. These developments implicitly underscore tensions between information theory, quantum mechanics, and fundamental physics that extend beyond conventional particle physics into cosmological models of black hole thermodynamics and the holographic principle."
+      },
+      "solution_criteria": [
+        "Extracts both explicit topics (e.g., quantum entanglement, wave function collapse) and implicit topics buried in technical context (e.g., information theory, thermodynamics, cosmology)",
+        "Identifies thematic elements that require inference from complex sentence structures and domain-specific language",
+        "Returns results as a JSON array of strings with no duplicates"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Testing with a dense passage containing implicit topics buried within complex sentences to evaluate whether the prompt can infer and surface less obvious thematic elements"
+    },
+    "score": 9,
+    "reasoning": "The solution fully satisfies all mandatory requirements: it is a valid JSON array of strings containing topics from the passage, with no extra commentary, and nothing else in the response. It demonstrates strong coverage of both explicit topics (quantum entanglement, Landauer's principle, black hole thermodynamics) and implicit thematic elements (information theory, cosmology). The extraction shows understanding of complex technical language and domain-specific context. Minor weaknesses exist in the inclusion of some philosophical properties as standalone topics, but these are marginal issues that don't violate the stated criteria. The solution meets all mandatory and secondary criteria effectively."
+  },
+  {
+    "output": "```json\n[\n  \"machine learning\",\n  \"climate science\",\n  \"neural networks\",\n  \"weather prediction\",\n  \"climate modeling\",\n  \"deep learning\",\n  \"convolutional neural networks\",\n  \"recurrent neural networks\",\n  \"spatiotemporal data\",\n  \"atmospheric dynamics\",\n  \"computational efficiency\",\n  \"climate simulations\",\n  \"precipitation patterns\",\n  \"interpretability\",\n  \"climate data assimilation\",\n  \"weather forecasting\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "This study examines the intersection of machine learning and climate science, specifically focusing on neural network applications in weather prediction and climate modeling. We employ deep learning architectures, particularly convolutional neural networks (CNNs) and recurrent neural networks (RNNs), to process spatiotemporal climate data. Our approach builds upon previous machine learning research in atmospheric dynamics while addressing computational efficiency challenges inherent to large-scale climate simulations. The neural network framework demonstrates superior performance compared to traditional statistical methods in predicting precipitation patterns, though questions remain about the interpretability of deep learning models in climate science applications. Furthermore, we investigate how machine learning can enhance climate data assimilation techniques, a critical component of modern weather forecasting systems."
+      },
+      "solution_criteria": [
+        "Extracts main distinct topics without excessive duplication (e.g., 'machine learning' and 'neural networks' should not both appear if one is a subtopic of the other)",
+        "Identifies hierarchical topics appropriately by recognizing that specific architectures (CNNs, RNNs) are implementations of the broader machine learning concept",
+        "Includes all major topic areas: machine learning, climate science, neural networks, weather prediction, climate modeling, and data assimilation"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Testing with a passage containing overlapping and hierarchical topics to verify the prompt correctly identifies distinct main topics without excessive duplication"
+    },
+    "score": 6,
+    "reasoning": "The solution meets all mandatory requirements: it is a valid JSON array of strings containing topics from the article with no extra commentary. However, it fails to properly apply the secondary criterion about hierarchical topic recognition. The criteria explicitly state that specific architectures (CNNs, RNNs) should be recognized as implementations of broader concepts, and by extension, 'neural networks' and 'deep learning' should not both appear alongside 'machine learning' as they represent the same conceptual hierarchy. The solution includes 16 items when a more rigorous application of the deduplication principle would reduce this to approximately 12-13 core topics. While the extraction is comprehensive, it does not adequately address the hierarchical organization requirement."
+  },
+  {
+    "output": "```json\n[\n  \"CRISPR-Cas9 gene editing\",\n  \"monogenic disorders\",\n  \"programmable nuclease\",\n  \"bacterial adaptive immunity\",\n  \"sgRNA design\",\n  \"PAM sequences\",\n  \"spinal muscular atrophy (SMA)\",\n  \"AAV-mediated delivery\",\n  \"SMN1 gene\",\n  \"motor function restoration\",\n  \"base editing\",\n  \"adenine base editors (ABEs)\",\n  \"cytosine base editors (CBEs)\",\n  \"double-strand break\",\n  \"ex vivo lymphocyte engineering\",\n  \"CAR-T cell immunotherapy\",\n  \"epigenetic modifications\",\n  \"HDAC inhibitors\",\n  \"DNA methyltransferase antagonists\",\n  \"mutagenesis\",\n  \"oncology\",\n  \"heterochromatin remodeling\",\n  \"checkpoint inhibitors\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Recent advances in CRISPR-Cas9 gene editing have revolutionized therapeutic applications for monogenic disorders. The programmable nuclease system, derived from bacterial adaptive immunity mechanisms, enables precise genomic modifications with reduced off-target effects through optimized sgRNA design and modified PAM sequences. Clinical trials for SMA (spinal muscular atrophy) treatment utilizing AAV-mediated delivery of SMN1 gene show 90% restoration of motor function, while base editing techniques\u2014including adenine base editors (ABEs) and cytosine base editors (CBEs)\u2014circumvent double-strand break formation, offering superior safety profiles for ex vivo lymphocyte engineering in CAR-T cell immunotherapy. Epigenetic modifications via HDAC inhibitors and DNA methyltransferase antagonists represent complementary approaches to traditional mutagenesis, particularly in oncology applications where heterochromatin remodeling demonstrates synergistic effects with checkpoint inhibitors."
+      },
+      "solution_criteria": [
+        "Extracts specialized terminology and acronyms as distinct topics (e.g., CRISPR-Cas9, sgRNA, PAM, SMA, AAV, SMN1, ABE, CBE, CAR-T, HDAC)",
+        "Identifies broader conceptual topics without over-simplification (e.g., gene editing, base editing, epigenetic modifications, immunotherapy)",
+        "Maintains technical precision and does not collapse domain-specific jargon into generic categories"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Testing with a passage containing domain-specific jargon and acronyms to verify the prompt correctly extracts technical topics and handles specialized terminology without over-simplification"
+    },
+    "score": 9,
+    "reasoning": "The solution fully satisfies all mandatory requirements: it is a valid JSON array of strings containing topics from the passage with no extra commentary. It excels at the secondary criteria by extracting both specialized terminology/acronyms and broader conceptual topics while maintaining technical precision. The extraction is comprehensive and well-balanced, capturing the full scope of the scholarly content from molecular mechanisms (sgRNA design, PAM sequences) through clinical applications (SMA treatment, CAR-T immunotherapy) to complementary approaches (epigenetic modifications). The minor weaknesses are negligible and do not detract from an otherwise excellent extraction that demonstrates strong understanding of the domain."
+  }
+]
