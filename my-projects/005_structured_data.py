@@ -20,7 +20,7 @@ def chat(messages, system=None):
         "model": model,
         "max_tokens": 1000,
         "messages": messages,
-        "output_config": {"format": {"type": "json_object"}},
+        #"output_config": {"format": {"type": "json_object"}},
     }
 
     if system:
@@ -32,33 +32,21 @@ def chat(messages, system=None):
 
 messages = []
 add_user_message(messages, "Generate a very short event bridge rule as json")
-messages
-a = []
-a = chat(messages, system="Provide the response in json format")
-print(a)
+response = chat(messages, system= "Output only json")
+print(response)
 
 
-response = []
-response = client.messages.create(
-    model=model,
-    max_tokens=1000,
-    #output_config={
-    #"format": {
-    #    "type": "json_schema",
-    #    "schema": {
-    #        "type": "object",
-    #        "additionalProperties": False,
-    #        "properties": {
-    #            "result": {"type": "string"}
-    #        },
-    #        "required": ["result"]
-    #        }
-    #    }
-    #},
-    system= "Output only json",
-    messages=[
-        {"role": "user", "content": "Generate a very short event bridge rule as json"}
-    ]
-)
 
-print(response.content[0].text)
+# """ output_config={
+# "format": {
+#    "type": "json_schema",
+#    "schema": {
+#        "type": "object",
+#        "additionalProperties": False,
+#        "properties": {
+#            "result": {"type": "string"}
+#        },
+#        "required": ["result"]
+#        }
+#    }
+# } """
