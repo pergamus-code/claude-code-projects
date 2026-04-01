@@ -7,6 +7,7 @@ from statistics import mean
 from dotenv import load_dotenv
 from anthropic import Anthropic
 from anthropic.types import ToolParam
+from anthropic.types import Message 
 from rich import print
 from rich.pretty import pprint
 from datetime import datetime, timedelta
@@ -19,11 +20,26 @@ model = "claude-haiku-4-5-20251001"
 
 
 #%% Helper Functions
-def add_user_message(messages, text):
-    user_message = {"role": "user", "content": text}
+def add_user_message(messages, message):
+    user_message = {
+        "role": "user",
+        "content": message.content if isinstance(message, Message) else message
+        }
     messages.append(user_message)
 
-def chat(messages, system=None, temperature=1.0):
+def add_assistant_message(messages, message):
+    assistant_message = {
+        "role": "assistant",
+        "content": message.content if isinstance(message, Message) else message
+        }
+    messages.append(assistant_message)
+
+def text_from_message(message):
+    return "\n".join(
+        [block.text for block in message.content if block.type == "text"]
+    )
+
+def chat(messages, system=None, temperature=1.0, tools=None):
     params = {
         "model": model,
         "max_tokens": 1000,
@@ -31,11 +47,15 @@ def chat(messages, system=None, temperature=1.0):
         "temperature": temperature,
     }
 
+    if tools:
+        params["tools"] = tools
+        
     if system:
         params["system"] = system
 
     message = client.messages.create(**params)
-    return message.content[0].text
+    return message
+
 
 
 
@@ -136,47 +156,10 @@ set_reminder_schema = {
     },
 }
 
-batch_tool_schema = {
-    "name": "batch_tool",
-    "description": "Invoke multiple other tool calls simultaneously",
-    "input_schema": {
-        "type": "object",
-        "properties": {
-            "invocations": {
-                "type": "array",
-                "description": "The tool calls to invoke",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "description": "The name of the tool to invoke",
-                        },
-                        "arguments": {
-                            "type": "string",
-                            "description": "The arguments to the tool, encoded as a JSON string",
-                        },
-                    },
-                    "required": ["name", "arguments"],
-                },
-            }
-        },
-        "required": ["invocations"],
-    },
-}
-
-pass
-
-
-
-
-#%%
-
-def get_current_date_time(date_format="%Y-%m-%d %H:%M:%S"):
+def get_current_datetime(date_format="%Y-%m-%d %H:%M:%S"):
     if not date_format:
         raise ValueError("date_format cannot be empty")
     return datetime.now().strftime(date_format)
-
 
 get_current_datetime_schema = ToolParam(
     {
@@ -195,73 +178,67 @@ get_current_datetime_schema = ToolParam(
 })
 
 
+#%% TOOL RUNNING
+def run_tool(tool_name, tool_input):
+    if tool_name == "get_current_date_time":
+        return get_current_datetime(**tool_input)
+    elif tool_name == "add_duration_to_datetime":
+        return add_duration_to_datetime(**tool_input)
+    elif tool_name == "set_reminder":
+        return set_reminder(**tool_input)
+    
 
+def run_tools(message):
+    tool_requests = [ block for block in message.content if block.type == "tool_use" ]
+    tool_result_blocks = []
 
+    for tool_request in tool_requests:
+        try:
+            tool_output = run_tool(tool_request.name, tool_request.input)
+            tool_result_block = {
+                "type": "tool_result",
+                "tool_use_id": tool_request.id,
+                "content": json.dumps(tool_output),
+                "is_error": False
+            }
+        except Exception as e:
+            tool_result_block = {
+                "type": "tool_result",
+                "tool_use_id": tool_request.id,
+                "content": f"Error: {e}",
+                "is_error": True
+            }
+        tool_result_blocks.append(tool_result_block)
 
+    return tool_result_blocks
+#%% RUN CONVERSATION
+def run_conversation(messages):
+    while True:
+        response = chat(messages, tools=[
+            get_current_datetime_schema,
+            add_duration_to_datetime_schema,
+            set_reminder_schema
+        ])
 
+        add_assistant_message(messages, response)
+        print(text_from_message(response))
 
+        if response.stop_reason != "tool_use":
+            break
 
+        tool_results = run_tools(response)
+        add_user_message(messages, tool_results)
 
+    return messages
 
-
-#%% 0 messages + 1st USER HISTORY APPEND
+#%% START OF RUN
 messages = []
 
-messages.append({"role": "user", "content": "What is the exact time, fomratted as HH:MM:SS"})
-
-
-
-#%% CLIENT CALL
-response = client.messages.create(
-    model = model,
-    max_tokens=1000,
-    messages=messages,
-    tools=[get_current_datetime_schema],
+add_user_message(
+    messages,
+    "Set a reminder for my doctors appointment. It's 177 days after Jan 1st, 2050."
 )
 
+run_conversation(messages)
 
 
-
-
-#%% ASSISTANT HISTORY APPEND
-messages.append({"role": "assistant", "content": response.content})
-
-
-
-
-
-
-#%%
-result = get_current_date_time(**response.content[0].input)
-
-
-#%% USER HISTORY APPEND
-messages.append({"role": "user",
-                 "content": [
-                     {
-                         "type": "tool_result",
-                         "tool_use_id": response.content[0].id,
-                         "content": result,
-                         "is_error": False
-                     }
-                 ]})
-
-
-
-
-# %%
-response = client.messages.create(
-    model = model,
-    max_tokens=1000,
-    messages=messages,
-    tools=[get_current_datetime_schema],
-)
-
-#%% ASSISTANT HISTORY APPPEND
-messages.append({"role": "assistant", "content": response.content})
-
-
-# %%
-messages
-
-# %%
